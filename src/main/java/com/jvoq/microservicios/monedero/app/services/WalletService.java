@@ -17,4 +17,6 @@ public interface WalletService {
   public Mono<Void> delete(Wallet wallet);
 
   public Mono<WalletDto> findByCellphoneNumber(String cellphoneNumber);
+  
+  public Mono<WalletDto> updateSaldo(String idMonedero, Double monto);
 }

@@ -25,6 +25,7 @@ public class WalletTransaction {
 	@JsonProperty("id_transaction_monedero")
 	private String idTransacionMonedero;
 	
+	//se guarda por debajo
 	@JsonProperty("id_monedero")
 	@Field("id_monedero")
 	private String idMonedero;

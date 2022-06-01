@@ -68,4 +68,12 @@ public class WalletServiceImplement implements WalletService {
 		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
 		return mapper.map(walletDto, Wallet.class);
 	}
+
+  @Override
+  public Mono<WalletDto> updateSaldo(String idMonedero, Double monto) {
+    return this.findById(idMonedero).flatMap(c -> {       
+      c.setSaldo(c.getSaldo()- monto);
+      return this.save(c);
+    });
+  }
 }

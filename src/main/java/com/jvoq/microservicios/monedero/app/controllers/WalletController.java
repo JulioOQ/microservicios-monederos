@@ -70,6 +70,9 @@ public class WalletController {
 
           w1.setSaldo(w1.getSaldo() - transaction.getMonto());
           walletService.save(w1).subscribe();
+          
+          w2.setSaldo(w2.getSaldo() + transaction.getMonto());
+          walletService.save(w2).subscribe();
 
           transaction.setIdMonedero(w1.getIdMonedero());
           return transactionService.save(transaction);
@@ -77,7 +80,7 @@ public class WalletController {
       } else {
         return Mono.error(new RuntimeException("El saldo del monedero es insuficiente"));
       }
-    }).map(t -> ResponseEntity.created(URI.create("/send".concat(t.getIdTransacionMonedero())))
+    }).map(t -> ResponseEntity.created(URI.create("/send-money".concat(t.getIdTransacionMonedero())))
         .contentType(MediaType.APPLICATION_JSON).body(t)).defaultIfEmpty(ResponseEntity.notFound().build());
   }
 
