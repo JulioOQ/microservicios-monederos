@@ -72,7 +72,7 @@ public class WalletServiceImplement implements WalletService {
   @Override
   public Mono<WalletDto> updateSaldo(String idMonedero, Double monto) {
     return this.findById(idMonedero).flatMap(c -> {       
-      c.setSaldo(c.getSaldo()- monto);
+      c.setSaldo(c.getSaldo() + monto);
       return this.save(c);
     });
   }

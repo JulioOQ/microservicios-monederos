@@ -16,11 +16,19 @@ public class ConsumidorTransaccion {
 
   @Bean
   public Consumer<Transaccion> transaccion() {
-    
-    return transaccion -> {
 
+    return transaccion -> {
       log.info("idMonedero " + transaccion.getIdMonederoMovil() + "monto " + transaccion.getMonto());
-      walletService.updateSaldo(transaccion.getIdMonederoMovil(), transaccion.getMonto()).subscribe();
+
+      if (transaccion.getMedioPago().toLowerCase().equals("yanqui")) {
+        log.info("Si pertenece a yanqui, idMonedero " + transaccion.getIdMonederoMovil() + "monto " + transaccion.getMonto());
+
+        walletService.updateSaldo(transaccion.getIdMonederoMovil(), transaccion.getMonto()).subscribe();
+      } else {
+        log.info(
+            "No pertenece a yanqui,idMonedero " + transaccion.getIdMonederoMovil() + "monto " + transaccion.getMonto());
+
+      }
 
     };
 
